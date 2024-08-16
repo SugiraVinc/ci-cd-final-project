@@ -1,0 +1,25 @@
+version: '1.0'
+
+tasks:
+  cleanup:
+    description: "Clean up temporary files and directories"
+    runs:
+      - name: Remove Python bytecode files
+        run: |
+          find . -name '*.pyc' -delete
+          find . -name '*.pyo' -delete
+          find . -name '*.pyd' -delete
+          find . -name '__pycache__' -type d -exec rm -r {} +
+
+      - name: Remove build and distribution directories
+        run: |
+          rm -rf build/
+          rm -rf dist/
+          rm -rf *.egg-info
+          
+      - name: Remove test and coverage reports
+        run: |
+          rm -f .coverage
+          rm -f *.cover
+          rm -f coverage.xml
+          rm -f nosetests.xml
